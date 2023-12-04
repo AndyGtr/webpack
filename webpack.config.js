@@ -11,7 +11,21 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         // [name] is a placeholder for the entry object keys
         // in this case 'bundle'
-        filename: '[name][contenthash].js'
+        filename: '[name][contenthash].js',
+        // clean the dist folder before each build
+        clean: true
+    },
+    devServer: {
+        // serve files from the dist directory
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        port: 3000,
+        open: true,
+        hot: true,
+        compress: true,
+        // prevents the default browser full page refresh on form submission and link change
+        historyApiFallback: true 
     },
     module: {
         rules: [
