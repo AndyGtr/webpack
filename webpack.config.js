@@ -9,7 +9,9 @@ module.exports = {
         bundle: path.resolve(__dirname, 'src/index.js')},
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
+        // [name] is a placeholder for the entry object keys
+        // in this case 'bundle'
+        filename: '[name][contenthash].js'
     },
     module: {
         rules: [
