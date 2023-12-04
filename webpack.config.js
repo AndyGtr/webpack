@@ -13,8 +13,11 @@ module.exports = {
         // in this case 'bundle'
         filename: '[name][contenthash].js',
         // clean the dist folder before each build
-        clean: true
+        clean: true,
+        // specify the format for the output file names when emitting assets
+        assetModuleFilename: '[name][ext]'
     },
+    devtool: 'source-map',
     devServer: {
         // serve files from the dist directory
         static: {
@@ -36,8 +39,20 @@ module.exports = {
                     'css-loader',
                     'sass-loader'
                 ]
-            }
-        ]   
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: { presets: ['@babel/preset-env'] }
+                },
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
+        ], 
     },
     plugins: [
         new HtmlWebpackPlugin({
